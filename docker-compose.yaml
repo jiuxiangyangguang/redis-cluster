@@ -1,0 +1,114 @@
+version: "3"
+services:
+  redis-master1:
+    image: redis:latest 
+    container_name: redis-master1 # 容器名称
+    environment: # 环境变量
+      - PORT=6380 # 会使用conf/nodes-${PORT}.conf这个配置文件
+    ports: # 映射端口，对外提供服务
+      - 6380:6380 # redis的服务端口
+      - 16380:16380 # redis集群监控端口
+    stdin_open: true # 标准输入打开
+    tty: true # 后台运行不退出
+    privileged: true # 拥有容器内命令执行的权限
+    volumes:
+      - ./redis-master1/conf/nodes-6380.conf:/etc/redis/nodes-6380.conf:rw #配置文件目录映射到宿主机
+      - ./redis-master1/data:/data
+      - ./redis-master1/logs:/logs
+    #docker执行的启动命令
+    command: redis-server /etc/redis/nodes-6380.conf
+
+  redis-master2:
+    image: redis:latest
+    container_name: redis-master2
+    environment:
+      - PORT=6381
+    ports:
+      - 6381:6381
+      - 16381:16381
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - ./redis-master2/conf/nodes-6381.conf:/etc/redis/nodes-6381.conf:rw
+      - ./redis-master2/data:/data
+      - ./redis-master2/logs:/logs
+    #docker执行的启动命令
+    command: redis-server /etc/redis/nodes-6381.conf
+
+  redis-master3:
+    image: redis:latest
+    container_name: redis-master3
+    environment:
+      - PORT=6382
+    ports:
+      - 6382:6382
+      - 16382:16382
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - ./redis-master3/conf/nodes-6382.conf:/etc/redis/nodes-6382.conf:rw
+      - ./redis-master3/data:/data
+      - ./redis-master3/logs:/logs
+    #docker执行的启动命令
+    command: redis-server /etc/redis/nodes-6382.conf
+
+  redis-slave1:
+    image: redis:latest
+    container_name: redis-slave1
+    environment:
+      - PORT=6383
+    ports:
+      - 6383:6383
+      - 16383:16383
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - ./redis-slave1/conf/nodes-6383.conf:/etc/redis/nodes-6383.conf:rw
+      - ./redis-slave1/data:/data
+      - ./redis-slave1/logs:/logs
+    #docker执行的启动命令
+    command: redis-server /etc/redis/nodes-6383.conf
+
+  redis-slave2:
+    image: redis:latest
+    container_name: redis-slave2
+    environment:
+      - PORT=6384
+    ports:
+      - 6384:6384
+      - 16384:16384
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - ./redis-slave2/conf/nodes-6384.conf:/etc/redis/nodes-6384.conf:rw
+      - ./redis-slave2/data:/data
+      - ./redis-slave2/logs:/logs
+    #docker执行的启动命令
+    command: redis-server /etc/redis/nodes-6384.conf
+
+  redis-slave3:
+    image: redis:latest
+    container_name: redis-slave3
+    environment:
+      - PORT=6385
+    ports:
+      - 6385:6385
+      - 16385:16385
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - ./redis-slave3/conf/nodes-6385.conf:/etc/redis/nodes-6385.conf:rw
+      - ./redis-slave3/data:/data
+      - ./redis-slave3/logs:/logs
+    #docker执行的启动命令
+    command: redis-server /etc/redis/nodes-6385.conf
+
+networks:
+  persist:
+    external:
+      name: redis-cluster
