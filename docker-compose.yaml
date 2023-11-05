@@ -14,7 +14,7 @@ services:
       redis:
         ipv4_address: 172.19.0.11
     volumes:
-      - ./redis-master1/conf/redis.conf:/etc/redis/redis.conf:rw #配置文件目录映射到宿主机
+      - ./redis-master1/conf/redis.conf:/etc/redis/redis.conf
       - ./data/redis-master1/data:/data
       - ./logs/redis-master1/logs:/logs
     #docker执行的启动命令
@@ -33,7 +33,7 @@ services:
       redis:
         ipv4_address: 172.19.0.12
     volumes:
-      - ./redis-master2/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis-master2/conf/redis.conf:/etc/redis/redis.conf
       - ./data/redis-master2/data:/data
       - ./logs/redis-master2/logs:/logs
     #docker执行的启动命令
@@ -52,7 +52,7 @@ services:
       redis:
         ipv4_address: 172.19.0.13    
     volumes:
-      - ./redis-master3/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis-master3/conf/redis.conf:/etc/redis/redis.conf
       - ./data/redis-master3/data:/data
       - ./logs/redis-master3/logs:/logs
     #docker执行的启动命令
@@ -71,7 +71,7 @@ services:
       redis:
         ipv4_address: 172.19.0.14    
     volumes:
-      - ./redis-slave1/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis-slave1/conf/redis.conf:/etc/redis/redis.conf
       - ./data/redis-slave1/data:/data
       - ./logs/redis-slave1/logs:/logs
     #docker执行的启动命令
@@ -90,7 +90,7 @@ services:
       redis:
         ipv4_address: 172.19.0.15    
     volumes:
-      - ./redis-slave2/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis-slave2/conf/redis.conf:/etc/redis/redis.conf
       - ./data/redis-slave2/data:/data
       - ./logs/redis-slave2/logs:/logs
     #docker执行的启动命令
@@ -109,7 +109,7 @@ services:
       redis:
         ipv4_address: 172.19.0.16    
     volumes:
-      - ./redis-slave3/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis-slave3/conf/redis.conf:/etc/redis/redis.conf
       - ./data/redis-slave3/data:/data
       - ./logs/redis-slave3/logs:/logs
     #docker执行的启动命令
